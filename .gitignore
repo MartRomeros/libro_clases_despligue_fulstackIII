@@ -1,0 +1,31 @@
+# Archivos locales de configuración de Terraform
+.terraform/
+
+# Archivos de estado (¡NUNCA SUBIR ESTOS!)
+# Contienen secretos, contraseñas de bases de datos y la topología de tu red en texto plano.
+*.tfstate
+*.tfstate.*
+
+# Archivos de variables con valores sensibles
+# Aquí es donde sueles poner tus contraseñas reales o claves de acceso.
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Archivos de variables de entorno de CLI
+.terraformrc
+terraform.rc
+
+# Logs de error y archivos temporales
+crash.log
+*.log
+
+# Planes de ejecución exportados (pueden contener datos sensibles)
+*.tfplan
+
+vockey
+vockey.pub
+.terraform.lock.hcl
