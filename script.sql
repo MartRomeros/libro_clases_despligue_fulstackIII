@@ -138,8 +138,8 @@ ALTER TABLE "sala_evaluacione_asistencia" ADD FOREIGN KEY ("evaluacion_id") REFE
 ALTER TABLE "sala_evaluacione_asistencia" ADD FOREIGN KEY ("asistencia_id") REFERENCES "asistencia" ("asistencia_id") DEFERRABLE INITIALLY IMMEDIATE;
 
 
--- 1. Limpiar datos previos (CUIDADO: Esto borra lo que haya en esas tablas)
-TRUNCATE roles, usuarios, estudiantes, docentes, apoderados, cursos, asignaturas, curso_asignatura_docente, evaluaciones, notas, asistencia, anotaciones CASCADE;
+-- 1. Limpiar datos previos
+TRUNCATE roles, usuarios, estudiantes, docentes, apoderados, cursos, asignaturas, curso_asignatura_docente, evaluaciones, notas, asistencia, anotaciones, salas, sala_evaluacione_asistencia CASCADE;
 
 -- 2. Insertar Roles (Indispensable para la tabla usuarios)
 INSERT INTO roles (rol_id, nombre) VALUES
@@ -148,52 +148,121 @@ INSERT INTO roles (rol_id, nombre) VALUES
 (3, 'Estudiante');
 
 -- 3. Insertar Usuarios base
-INSERT INTO usuarios (usuario_id, rol_id, rut, nombre, apellido_paterno, apellido_materno, email,password) VALUES
-(1, 1, '11.111.111-1', 'Admin', 'Sistema', 'Principal', 'admin@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(2, 2, '12.222.222-2', 'Carla', 'Rodríguez', 'Pérez', 'c.rodriguez@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(3, 2, '13.333.333-3', 'Marcos', 'Soto', 'López', 'm.soto@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(4, 3, '25.555.555-5', 'Diego', 'González', 'Muñoz', 'd.gonzalez@estudiante.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(5, 3, '26.666.666-6', 'Sofía', 'Tapia', 'Venegas', 's.tapia@estudiante.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(6, 1, '10.000.000-0', 'Juan', 'González', 'Padre', 'j.gonzalez@apoderado.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y');
+-- 3. Insertar Usuarios (20 usuarios en total)
+INSERT INTO usuarios (usuario_id, rol_id, rut, nombre, apellido_paterno, apellido_materno, email, password) VALUES
+(1, 1, '11.111.111-1', 'Admin', 'Sistema', 'Principal', 'admin@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(7, 1, '11.111.111-7', 'Laura', 'Méndez', 'Cortés', 'l.mendez@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(2, 2, '12.222.222-2', 'Carla', 'Rodríguez', 'Pérez', 'c.rodriguez@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(3, 2, '13.333.333-3', 'Marcos', 'Soto', 'López', 'm.soto@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(9, 2, '14.444.444-4', 'Patricia', 'Rojas', 'Díaz', 'p.rojas@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(10, 2, '15.555.555-5', 'Andrés', 'Castro', 'Silva', 'a.castro@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(11, 2, '16.666.666-6', 'Elena', 'Morales', 'Ramos', 'e.morales@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(12, 2, '17.777.777-7', 'Roberto', 'Jara', 'Valencia', 'r.jara@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(4, 3, '20.000.000-4', 'Diego', 'González', 'Muñoz', 'd.gonzalez@estudiante.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(5, 3, '20.000.000-5', 'Sofía', 'Tapia', 'Venegas', 's.tapia@estudiante.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(13, 3, '20.000.000-1', 'Lucas', 'Pérez', 'Herrera', 'l.perez@estudiante.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(14, 3, '20.000.000-2', 'Martina', 'Díaz', 'Espinoza', 'm.diaz@estudiante.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(15, 3, '20.000.000-3', 'Benjamín', 'Torres', 'Leiva', 'b.torres@estudiante.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(16, 3, '21.000.000-1', 'Isidora', 'Fuentes', 'Salinas', 'i.fuentes@estudiante.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(17, 3, '21.000.000-2', 'Matías', 'Araya', 'Sepúlveda', 'm.araya@estudiante.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(18, 3, '21.000.000-3', 'Florencia', 'Vega', 'Miranda', 'f.vega@estudiante.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(6, 1, '10.000.000-6', 'Juan', 'González', 'Padre', 'j.gonzalez@apoderado.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(19, 1, '10.000.000-9', 'Mónica', 'Tapia', 'Madre', 'm.tapia@apoderado.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(20, 1, '10.000.000-1', 'Ricardo', 'Pérez', 'Padre', 'r.perez@apoderado.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(21, 1, '10.000.000-2', 'Sandra', 'Díaz', 'Madre', 's.diaz@apoderado.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y');
 
+-- 4. Especializar Usuarios (Tablas Hijas)
 -- 4. Especializar Usuarios (Tablas Hijas)
 INSERT INTO docentes (docente_id, especialidad) VALUES
 (2, 'Matemáticas y Física'),
-(3, 'Lenguaje y Comunicación');
+(3, 'Lenguaje y Comunicación'),
+(9, 'Historia y Geografía'),
+(10, 'Ciencias Naturales'),
+(11, 'Inglés'),
+(12, 'Artes Visuales');
 
-INSERT INTO apoderados (apoderado_id) VALUES (6);
+INSERT INTO apoderados (apoderado_id) VALUES (6), (19), (20), (21);
 
+-- 5. Estructura de Cursos y Asignaturas
 -- 5. Estructura de Cursos y Asignaturas
 INSERT INTO cursos (curso_id, nivel, letra, anio_academico) VALUES
 (1, '1° Medio', 'A', 2024),
-(2, '2° Medio', 'B', 2024);
+(2, '1° Medio', 'B', 2024),
+(3, '1° Medio', 'C', 2024),
+(4, '2° Medio', 'A', 2024),
+(5, '2° Medio', 'B', 2024),
+(6, '3° Medio', 'A', 2024),
+(7, '4° Medio', 'A', 2024);
 
 INSERT INTO asignaturas (asignatura_id, nombre, siglas) VALUES
 (1, 'Matemática', 'MAT01'),
-(2, 'Lenguaje', 'LEN01');
+(2, 'Lenguaje', 'LEN01'),
+(3, 'Historia', 'HIS01'),
+(4, 'Ciencias Naturales', 'CIE01'),
+(5, 'Inglés', 'ING01'),
+(6, 'Artes Visuales', 'ART01'),
+(7, 'Educación Física', 'EDF01');
 
+-- 6. Relacionar Estudiantes con Cursos y Apoderados
 -- 6. Relacionar Estudiantes con Cursos y Apoderados
 INSERT INTO estudiantes (estudiante_id, curso_id) VALUES
 (4, 1),
-(5, 1);
+(5, 1),
+(13, 1),
+(14, 2),
+(15, 2),
+(16, 3),
+(17, 3),
+(18, 4);
 
 INSERT INTO apoderado_estudiante (apoderado_id, estudiante_id) VALUES
-(6, 4);
+(6, 4),
+(19, 5),
+(20, 13),
+(21, 14),
+(6, 15); -- Juan es apoderado de Diego y Benjamín
 
 -- 7. Relación Académica y Evaluaciones
+-- 7. Relación Académica y Evaluaciones
 INSERT INTO curso_asignatura_docente (id, curso_id, asignatura_id, docente_id) VALUES
-(1, 1, 1, 2); -- Carla enseña Matemáticas en el 1° A
+(1, 1, 1, 2), -- Carla: Matemática en 1°A
+(2, 1, 2, 3), -- Marcos: Lenguaje en 1°A
+(3, 1, 3, 9), -- Patricia: Historia en 1°A
+(4, 2, 4, 10), -- Andrés: Ciencias en 1°B
+(5, 3, 5, 11), -- Elena: Inglés en 1°C
+(6, 4, 6, 12); -- Roberto: Artes en 2°A
 
 INSERT INTO evaluaciones (evaluacion_id, cad_id, nombre, fecha_evaluacion) VALUES
-(1, 1, 'Prueba Parcial 1', '2024-05-15');
+(1, 1, 'Prueba Parcial 1', '2024-05-15'),
+(2, 2, 'Control de Lectura', '2024-05-20'),
+(3, 3, 'Ensayo Histórico', '2024-05-25'),
+(4, 4, 'Laboratorio Química', '2024-06-01');
 
 -- 8. Datos finales (Notas, Asistencia, Anotaciones)
+-- 8. Datos finales (Notas, Asistencia, Anotaciones, Salas)
 INSERT INTO notas (evaluacion_id, estudiante_id, valor) VALUES
 (1, 4, 6.5),
-(1, 5, 5.8);
+(1, 5, 5.8),
+(1, 13, 4.5),
+(2, 4, 7.0),
+(2, 5, 6.2),
+(3, 4, 5.5),
+(4, 14, 6.0);
 
-INSERT INTO asistencia (estudiante_id, curso_id, fecha, estado, tipo_asistencia) VALUES
-(4, 1, '2024-05-15', 'Presente', 'Presencial');
+INSERT INTO asistencia (asistencia_id, estudiante_id, curso_id, fecha, estado, tipo_asistencia) VALUES
+(1, 4, 1, '2024-05-15', 'Presente', 'Presencial'),
+(2, 5, 1, '2024-05-15', 'Presente', 'Presencial'),
+(3, 13, 1, '2024-05-15', 'Ausente', 'Justificada'),
+(4, 14, 2, '2024-05-15', 'Presente', 'Presencial');
 
 INSERT INTO anotaciones (estudiante_id, docente_id, tipo, descripcion) VALUES
-(4, 2, 'Positiva', 'Excelente desempeño en clases.');
+(4, 2, 'Positiva', 'Excelente desempeño en clases.'),
+(5, 3, 'Positiva', 'Gran participación en debates.'),
+(13, 9, 'Negativa', 'Llega tarde a clases recurrentemente.');
+
+INSERT INTO salas (sala_id) VALUES
+(1), (2), (3), (4), (5);
+
+INSERT INTO sala_evaluacione_asistencia (sala_id, evaluacion_id, asistencia_id) VALUES
+(1, 1, 1),
+(2, 2, 2);
