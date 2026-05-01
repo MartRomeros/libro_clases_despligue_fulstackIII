@@ -23,3 +23,7 @@ variable "jwt_secret" {
   sensitive   = true
 }
 
+variable "db_ssl" {
+  description = "SSL enabled"
+  type        = string
+}

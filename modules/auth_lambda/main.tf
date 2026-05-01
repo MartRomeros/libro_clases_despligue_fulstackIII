@@ -5,6 +5,7 @@ variable "db_host" { type = string }
 variable "db_user" { type = string }
 variable "db_password" { type = string }
 variable "db_name" { type = string }
+variable "db_ssl" { type = string }
 variable "jwt_secret" { type = string }
 variable "frontend_url" { type = string }
 variable "image_uri" { type = string }
@@ -37,6 +38,7 @@ resource "aws_lambda_function" "ms_auth" {
       DB_HOST      = var.db_host
       DB_PORT      = "5432"
       DB_DATABASE  = var.db_name
+      DB_SSL       = var.db_ssl
       JWT_SECRET   = var.jwt_secret
       FRONTEND_URL = var.frontend_url
     }

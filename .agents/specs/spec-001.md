@@ -30,3 +30,7 @@ Se ha completado el requerimiento siguiendo estos pasos:
     *   **Externalización**: En entornos de AWS Academy, a veces es preferible manejar recursos volátiles o con configuraciones post-despliegue complejas (como el poblado de bases de datos) mediante scripts para evitar limitaciones del proveedor de Terraform o bloqueos de la cuenta.
     *   **Seguridad**: El script utiliza la llave `vockey` existente y aplica los permisos correctos (`chmod 400`) antes de intentar la conexión.
     *   **Orden de Ejecución**: El script está diseñado para ser lo último que se ejecute, una vez que la red y el RDS ya han sido creados por Terraform.
+4.  **Gestión Dinámica de Llaves (Actualización)**:
+    *   **Autonomía**: Se añadió lógica para verificar la existencia de `vockey` y `vockey.pub` localmente, generándolas si faltan.
+    *   **Sincronización con AWS**: El script ahora importa automáticamente la llave pública a AWS EC2. Si ya existe, se re-importa para asegurar que la llave privada local coincida con la registrada en la nube.
+    *   **Justificación**: Esta mejora elimina la dependencia manual de subir llaves a la consola de AWS, permitiendo un flujo de despliegue 100% automatizado y compatible con las restricciones de AWS Academy.

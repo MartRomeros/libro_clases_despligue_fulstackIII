@@ -10,6 +10,27 @@ export AWS_DEFAULT_REGION="$REGION"
 
 echo "🚀 Iniciando creación de Bastion EC2..."
 
+# 0. Manejo de llaves SSH (vockey)
+echo "🔐 Configurando llaves SSH..."
+if [ ! -f "vockey" ] || [ ! -f "vockey.pub" ]; then
+    echo "🗝️ Generando nueva llave SSH vockey..."
+    ssh-keygen -t rsa -b 4096 -f vockey -N ""
+fi
+chmod 400 vockey
+
+echo "🔑 Importando Key Pair 'vockey' a AWS..."
+# Verificamos si existe; si existe, lo eliminamos para asegurar que coincida con nuestra llave local
+if aws ec2 describe-key-pairs --key-names vockey --region "$REGION" >/dev/null 2>&1; then
+    echo "⚠️ El Key Pair 'vockey' ya existe. Re-importando para asegurar sincronización..."
+    aws ec2 delete-key-pair --key-name vockey --region "$REGION"
+fi
+
+aws ec2 import-key-pair \
+    --key-name "vockey" \
+    --public-key-material fileb://vockey.pub \
+    --region "$REGION"
+echo "✅ Key Pair 'vockey' importado exitosamente."
+
 # 1. Obtener valores de Terraform
 echo "📊 Obteniendo outputs de Terraform..."
 SUBNET_ID=$(terraform output -raw public_subnet_id)
@@ -58,8 +79,8 @@ PUBLIC_IP=$(aws ec2 describe-instances \
 echo "✅ Instancia lista! IP Pública: $PUBLIC_IP"
 
 
-# 4. Preparar llave SSH
-echo "🛡️ Configurando permisos de la llave vockey..."
+# 4. Preparar llave SSH (ya configurada en el paso 0)
+echo "🛡️ Verificando permisos de la llave vockey..."
 chmod 400 vockey
 
 # 5. Esperar a que SSH esté disponible (reintentos)

@@ -72,6 +72,7 @@ module "auth_lambda" {
   db_user           = var.username
   db_password       = var.password
   db_name           = var.db_name
+  db_ssl            = var.db_ssl
   jwt_secret        = var.jwt_secret
   frontend_url      = "*"
   image_uri         = "${module.ecr_auth.repository_url}:latest"
