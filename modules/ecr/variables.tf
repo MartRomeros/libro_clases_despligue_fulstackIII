@@ -1,10 +1,4 @@
-variable "repository_name" {
-  description = "Nombre del repositorio ECR"
+variable "name" {
+  description = "nombre del ecr"
   type        = string
-}
-
-variable "environment" {
-  description = "Entorno del proyecto (ej: dev, prod)"
-  type        = string
-  default     = "dev"
 }

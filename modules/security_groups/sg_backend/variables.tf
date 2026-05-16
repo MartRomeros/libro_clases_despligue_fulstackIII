@@ -1,4 +1,4 @@
 variable "vpc_id" {
-  description = "ID de la VPC"
+  description = "Id de la vpc a asociar"
   type        = string
 }

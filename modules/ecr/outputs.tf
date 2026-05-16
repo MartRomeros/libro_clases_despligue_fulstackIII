@@ -1,9 +1,11 @@
-output "repository_url" {
-  description = "URL del repositorio ECR creado"
-  value       = aws_ecr_repository.repo.repository_url
+output "ecr_name" {
+
+  description = "nombre del ecr creado en este backend"
+  value       = module.ecr_colegio.repository_name
 }
 
-output "repository_arn" {
-  description = "ARN del repositorio ECR creado"
-  value       = aws_ecr_repository.repo.arn
+output "ecr_url" {
+
+  description = "url del ecr"
+  value       = module.ecr_colegio.repository_url
 }

@@ -25,5 +25,6 @@ module "vpc_colegio" {
   tags = {
     Terraform = "true"
     Layer     = "Network"
+    Project   = "Colegio Fullstack III"
   }
 }
