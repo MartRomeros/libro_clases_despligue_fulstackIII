@@ -1,5 +1,0 @@
-1. terraform apply -target=module.ecr_colegio
-
-2. ./push_image.sh
-
-3. terraform apply -auto-approve

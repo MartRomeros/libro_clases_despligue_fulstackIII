@@ -1,0 +1,6 @@
+para conectarse a traves de wsl en win hacerlo asi desde wsl
+
+mv 165387-vockey.pem ~/.ssh/
+chmod 400 ~/.ssh/165387-vockey.pem
+ssh -i ~/.ssh/165387-vockey.pem ubuntu@54.91.240.46
+

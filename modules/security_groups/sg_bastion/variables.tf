@@ -4,3 +4,9 @@ variable "vpc_id" {
 
 }
 
+variable "public_ingress_cidr" {
+  description = "CIDR permitido para trafico publico"
+  type        = string
+  default     = "0.0.0.0/0"
+}
+

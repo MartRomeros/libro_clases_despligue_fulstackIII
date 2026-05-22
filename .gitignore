@@ -29,3 +29,5 @@ crash.log
 vockey
 vockey.pub
 .terraform.lock.hcl
+
+*.pem

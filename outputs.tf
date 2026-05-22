@@ -6,6 +6,10 @@ output "bastion_sg_id" {
   value = module.sg_bastion.sg_bastion_id
 }
 
+output "backend_sg_id" {
+  value = module.sg_backend.sg_backend_id
+}
+
 output "rds_endpoint" {
   value = aws_db_instance.colegio_db.endpoint
 }
@@ -14,37 +18,29 @@ output "ubuntu_ami_id" {
   value = data.aws_ami.ubuntu.id
 }
 
-output "ecr_urls" {
+output "ec2_instance_addresses" {
   value = {
-    for key, repo in module.ecr_colegio :
-    key => repo.ecr_url
+    for name, instance in module.ec2_instances :
+    name => {
+      instance_id = instance.instance_id
+      public_ip   = instance.public_ip
+      private_ip  = instance.private_ip
+      public_dns  = instance.public_dns
+    }
   }
 }
 
-output "microservice_lambda_names" {
-  description = "Function names for deployed microservice Lambdas"
+output "api_gateway_base_url" {
+  value = "http://${module.ec2_instances["ec2-api-gw"].public_ip}"
+}
+
+output "ssh_commands" {
   value = {
-    auth           = module.ms_authentication_lambda.function_name
-    attendance     = module.ms_attendance_lambda.function_name
-    gestion        = module.ms_gestion_lambda.function_name
-    comunicaciones = module.ms_comunicaciones_lambda.function_name
+    ec2_bastion = "ssh -i 165387-vockey.pem ubuntu@${module.ec2_instances["ec2-bastion"].public_ip}"
+    ec2_api_gw  = "ssh -i 165387-vockey.pem ubuntu@${module.ec2_instances["ec2-api-gw"].public_ip}"
+    ec2_ms_auth = "ssh -i 165387-vockey.pem -J ubuntu@${module.ec2_instances["ec2-bastion"].public_ip} ubuntu@${module.ec2_instances["ec2-ms-auth"].private_ip}"
+    ec2_ms_asistencia = "ssh -i 165387-vockey.pem -J ubuntu@${module.ec2_instances["ec2-bastion"].public_ip} ubuntu@${module.ec2_instances["ec2-ms-asistencia"].private_ip}"
+    ec2_ms_gestion = "ssh -i 165387-vockey.pem -J ubuntu@${module.ec2_instances["ec2-bastion"].public_ip} ubuntu@${module.ec2_instances["ec2-ms-gestion"].private_ip}"
+    ec2_ms_comunicaciones = "ssh -i 165387-vockey.pem -J ubuntu@${module.ec2_instances["ec2-bastion"].public_ip} ubuntu@${module.ec2_instances["ec2-ms-comunicaciones"].private_ip}"
   }
-}
-
-output "microservice_lambda_invoke_arns" {
-  description = "Invoke ARNs for deployed microservice Lambdas"
-  value = {
-    auth           = module.ms_authentication_lambda.invoke_arn
-    attendance     = module.ms_attendance_lambda.invoke_arn
-    gestion        = module.ms_gestion_lambda.invoke_arn
-    comunicaciones = module.ms_comunicaciones_lambda.invoke_arn
-  }
-}
-
-output "api_gateway_url" {
-  value = module.api_gateway_http.api_endpoint
-}
-
-output "api_gateway_service_endpoints" {
-  value = module.api_gateway_http.service_endpoints
 }

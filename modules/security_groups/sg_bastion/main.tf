@@ -2,7 +2,7 @@ module "sg_bastion" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"
 
-  name = "bastion"
+  name = "public"
 
   vpc_id = var.vpc_id
 
@@ -12,7 +12,21 @@ module "sg_bastion" {
       to_port     = 22
       protocol    = "tcp"
       description = "SSH"
-      cidr_blocks = "0.0.0.0/0"
+      cidr_blocks = var.public_ingress_cidr
+    },
+    {
+      from_port   = 80
+      to_port     = 80
+      protocol    = "tcp"
+      description = "HTTP"
+      cidr_blocks = var.public_ingress_cidr
+    },
+    {
+      from_port   = 443
+      to_port     = 443
+      protocol    = "tcp"
+      description = "HTTPS"
+      cidr_blocks = var.public_ingress_cidr
     }
   ]
 
