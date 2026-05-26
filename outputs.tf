@@ -31,7 +31,15 @@ output "ec2_instance_addresses" {
 }
 
 output "api_gateway_base_url" {
-  value = "http://${module.ec2_instances["ec2-api-gw"].public_ip}"
+  value = module.api_gateway.invoke_url
+}
+
+output "api_gateway_id" {
+  value = module.api_gateway.api_id
+}
+
+output "nginx_origin_url" {
+  value = "http://${module.ec2_instances["ec2-api-gw"].public_dns}"
 }
 
 output "ssh_commands" {

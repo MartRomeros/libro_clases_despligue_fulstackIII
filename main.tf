@@ -120,6 +120,19 @@ module "ec2_instances" {
   root_volume_type            = var.ec2_root_volume_type
 }
 
+module "api_gateway" {
+  source = "./modules/api_gateway"
+
+  name                 = "colegio-http-api"
+  nginx_base_url       = "http://${module.ec2_instances["ec2-api-gw"].public_dns}"
+  stage_name           = "$default"
+  cors_allowed_origins = ["*"]
+  tags = {
+    Project = "Colegio Fullstack III"
+    Layer   = "Edge"
+  }
+}
+
 
 resource "aws_db_subnet_group" "colegio_db_subnet_group" {
   name       = "colegio-db-subnet-group"
