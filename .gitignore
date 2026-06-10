@@ -31,3 +31,8 @@ vockey.pub
 .terraform.lock.hcl
 
 *.pem
+
+.env
+.claude/
+CLAUDE.md
+.obsidian/

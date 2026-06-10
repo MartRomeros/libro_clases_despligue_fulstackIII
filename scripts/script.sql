@@ -316,3 +316,10 @@ INSERT INTO curso_asignatura_docente (curso_id, asignatura_id, docente_id) VALUE
 (17, 5, 6),
 (19, 6, 6);
 
+-- Sincronizar secuencias con los IDs insertados manualmente
+SELECT setval(pg_get_serial_sequence('roles',    'rol_id'),     (SELECT MAX(rol_id)     FROM roles));
+SELECT setval(pg_get_serial_sequence('usuarios', 'usuario_id'), (SELECT MAX(usuario_id) FROM usuarios));
+SELECT setval(pg_get_serial_sequence('cursos',   'curso_id'),   (SELECT MAX(curso_id)   FROM cursos));
+SELECT setval(pg_get_serial_sequence('asignaturas', 'asignatura_id'), (SELECT MAX(asignatura_id) FROM asignaturas));
+SELECT setval(pg_get_serial_sequence('curso_asignatura_docente', 'id'), (SELECT MAX(id) FROM curso_asignatura_docente));
+

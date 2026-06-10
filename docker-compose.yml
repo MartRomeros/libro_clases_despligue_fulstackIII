@@ -1,5 +1,4 @@
-services:
-
+services:  
   db:
     image: postgres:15-alpine
     container_name: postgres_db
@@ -13,6 +12,94 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./script.sql:/docker-entrypoint-initdb.d/script.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d colegio"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  nginx:
+    image: martromeros/api-gateway:latest
+    container_name: nginx
+    restart: always
+    depends_on:
+      - ms-auth
+      - ms-asistencia
+      - ms-comunicaciones
+      - ms-gestion
+    ports:
+      - "80:80"
 
+
+  ms-auth:
+    image: martromeros/ms-auth:latest
+    container_name: ms_auth
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      JWT_SECRET: "default-secret"
+      SALT_ROUNDS: "12"
+      DB_USER: "postgres"
+      DB_PASSWORD: "secure-key"
+      DB_HOST: "db"
+      DB_PORT: "5432"
+      DB_DATABASE: "colegio"
+
+  ms-asistencia:
+    image: martromeros/ms-asistencia:latest
+    container_name: ms_asistencia
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: "3001"
+      JWT_SECRET: "default-secret"
+      DB_USER: "postgres"
+      DB_PASSWORD: "secure-key"
+      DB_HOST: "db"
+      DB_PORT: "5432"
+      DB_DATABASE: "colegio"
+
+  ms-comunicaciones:
+    image: martromeros/ms-comunicaciones:latest
+    container_name: ms_comunicaciones
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3002:3002"
+    environment:
+      PORT: "3002"
+      UPLOAD_PATH: "C:\\ruta\\al\\directorio\\FTP"
+      API_RESEND: ""
+      DB_USER: "postgres"
+      DB_PASSWORD: "secure-key"
+      DB_HOST: "db"
+      DB_PORT: "5432"
+      DB_DATABASE: "colegio"
+  
+  ms-gestion:
+    image: martromeros/ms-gestion:latest
+    container_name: ms_gestion
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: "jdbc:postgresql://db:5432/colegio"
+      DB_USERNAME: "postgres"
+      DB_PASSWORD: "secure-key"
+      
 volumes:
-  postgres_data: # <--- Ahora tiene la sangría correcta
+  postgres_data:
