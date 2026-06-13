@@ -17,3 +17,8 @@ output "stage_name" {
   description = "Stage name in use"
   value       = aws_apigatewayv2_stage.this.name
 }
+
+output "vpc_link_id" {
+  description = "VPC Link ID"
+  value       = aws_apigatewayv2_vpc_link.main.id
+}

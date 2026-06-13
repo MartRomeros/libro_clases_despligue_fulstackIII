@@ -3,7 +3,7 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "public_sg_id" {
-  description = "Security group ID publico autorizado para acceder al backend"
+variable "alb_sg_id" {
+  description = "SG del ALB para permitir tráfico de los microservicios"
   type        = string
 }

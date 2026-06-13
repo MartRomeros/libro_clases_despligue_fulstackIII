@@ -289,3 +289,6 @@ terraform destroy
 - Mover secretos a variables de entorno, `tfvars` no versionados o un secret manager.
 - Agregar CI para `terraform fmt`, `validate` y `plan`.
 - Incorporar documentacion de despliegue de los microservicios cuando ese repositorio o artefactos existan.
+
+
+psql -h "$RDS_HOST" -U postgres -d colegio < ~/script.sql

@@ -13,15 +13,10 @@ module "sg_database" {
       protocol                 = "tcp"
       description              = "Acceso a la DB desde backend"
       source_security_group_id = var.sg_backend_id
-    },
-    {
-      from_port                = 5432
-      to_port                  = 5432
-      protocol                 = "tcp"
-      description              = "Acceso a la DB desde el bastion ec2"
-      source_security_group_id = var.sg_bastion_id
-    },
+    }
   ]
+
+  egress_rules = ["all-all"]
 
   tags = {
     Name = "database-sg"

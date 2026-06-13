@@ -11,20 +11,29 @@ resource "aws_apigatewayv2_api" "this" {
   tags = var.tags
 }
 
+resource "aws_apigatewayv2_vpc_link" "main" {
+  name               = "${var.name}-vpc-link"
+  subnet_ids         = var.vpc_link_subnet_ids
+  security_group_ids = [var.vpc_link_sg_id]
+  tags               = var.tags
+}
+
 resource "aws_apigatewayv2_integration" "nginx_proxy" {
   api_id             = aws_apigatewayv2_api.this.id
   integration_type   = "HTTP_PROXY"
   integration_method = "ANY"
-  integration_uri    = var.nginx_base_url
-  connection_type    = "INTERNET"
+  integration_uri    = var.alb_listener_arn
+  connection_type    = "VPC_LINK"
+  connection_id      = aws_apigatewayv2_vpc_link.main.id
 }
 
 resource "aws_apigatewayv2_integration" "nginx_greedy_proxy" {
   api_id             = aws_apigatewayv2_api.this.id
   integration_type   = "HTTP_PROXY"
   integration_method = "ANY"
-  integration_uri    = "${trimsuffix(var.nginx_base_url, "/")}/{proxy}"
-  connection_type    = "INTERNET"
+  integration_uri    = var.alb_listener_arn
+  connection_type    = "VPC_LINK"
+  connection_id      = aws_apigatewayv2_vpc_link.main.id
 }
 
 resource "aws_apigatewayv2_route" "root" {

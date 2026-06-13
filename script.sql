@@ -165,7 +165,7 @@ BEFORE INSERT ON estudiantes
 FOR EACH ROW EXECUTE FUNCTION verificar_cupo_curso();
 
 -- 1. Limpiar datos previos
-TRUNCATE roles, usuarios, estudiantes, docentes, apoderados, cursos, asignaturas, curso_asignatura_docente, evaluaciones, notas, asistencia, anotaciones, salas CASCADE;
+TRUNCATE roles, usuarios, estudiantes, docentes, apoderados, cursos, asignaturas, curso_asignatura_docente, evaluaciones, notas, asistencia, anotaciones, salas, mensajeria CASCADE;
 
 -- 2. Insertar Roles
 INSERT INTO roles (rol_id, nombre) VALUES

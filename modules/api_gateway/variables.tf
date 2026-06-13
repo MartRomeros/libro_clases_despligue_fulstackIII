@@ -3,14 +3,19 @@ variable "name" {
   type        = string
 }
 
-variable "nginx_base_url" {
-  description = "Base HTTP URL for nginx origin, for example http://ec2-x-x-x-x.compute-1.amazonaws.com"
+variable "alb_listener_arn" {
+  description = "ARN del listener del ALB interno (destino del VPC Link)"
   type        = string
+}
 
-  validation {
-    condition     = can(regex("^http://", var.nginx_base_url))
-    error_message = "nginx_base_url must start with http://"
-  }
+variable "vpc_link_sg_id" {
+  description = "ID del SG del VPC Link (creado externamente para evitar dependencia circular)"
+  type        = string
+}
+
+variable "vpc_link_subnet_ids" {
+  description = "Subnets privadas para el VPC Link"
+  type        = list(string)
 }
 
 variable "stage_name" {

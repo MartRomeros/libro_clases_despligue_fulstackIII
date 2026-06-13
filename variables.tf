@@ -34,6 +34,12 @@ variable "ec2_root_volume_type" {
   default     = "gp3"
 }
 
+variable "alb_name" {
+  description = "Name for the internal Application Load Balancer"
+  type        = string
+  default     = "colegio-alb"
+}
+
 variable "db_name" {
   description = "nombre de la base de datos"
   type        = string

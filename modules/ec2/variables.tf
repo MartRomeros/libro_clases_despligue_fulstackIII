@@ -14,8 +14,8 @@ variable "ami" {
   type        = string
 }
 
-variable "key_name" {
-  description = "AWS key pair name"
+variable "iam_instance_profile" {
+  description = "IAM instance profile name for SSM access"
   type        = string
 }
 

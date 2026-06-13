@@ -13,10 +13,6 @@ module "vpc_colegio" {
   public_route_table_tags  = { Name = "tabla-publica-colegio" }
   private_route_table_tags = { Name = "tabla-privada-colegio" }
 
-  # CRÍTICO: Permitir resolución DNS para que Lambda encuentre a RDS
-  enable_dns_hostnames = true
-  enable_dns_support   = true
-
   # Requerimiento de Gateways (Simplificado para Academy)
   enable_nat_gateway     = true
   single_nat_gateway     = true
