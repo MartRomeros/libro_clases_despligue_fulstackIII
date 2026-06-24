@@ -19,10 +19,9 @@ variable "security_group_ids" {
 }
 
 variable "services" {
-  description = "Map of service key to instance_id and port for target group creation"
+  description = "Map of service key to port for target group creation (ECS registers tasks by IP)"
   type = map(object({
-    instance_id = string
-    port        = number
+    port = number
   }))
 }
 

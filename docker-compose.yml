@@ -112,6 +112,20 @@ services:
       RABBITMQ_PORT: 5672
       RABBITMQ_USER: admin
       RABBITMQ_PASS: admin123
+  ms-matricula:
+    image: martromeros/ms-matricula:latest
+    container_name: ms_matricula
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3003:3003"
+    environment:
+      DB_URL: postgresql://postgres:secure-key@db:5432/colegio
+      #WEBPAY_COMMERCE_CODE: ${WEBPAY_COMMERCE_CODE}
+      #WEBPAY_API_KEY: ${WEBPAY_API_KEY}
+      
 
 
   rabbit-mq:

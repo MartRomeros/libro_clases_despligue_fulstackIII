@@ -13,11 +13,11 @@ resource "aws_lb" "main" {
 resource "aws_lb_target_group" "services" {
   for_each = var.services
 
-  name        = "${var.name}-${each.key}-tg"
+  name        = "${each.key}-tg"
   port        = each.value.port
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
-  target_type = "instance"
+  target_type = "ip"
 
   health_check {
     enabled             = true
@@ -32,13 +32,6 @@ resource "aws_lb_target_group" "services" {
   }
 }
 
-resource "aws_lb_target_group_attachment" "services" {
-  for_each = var.services
-
-  target_group_arn = aws_lb_target_group.services[each.key].arn
-  target_id        = each.value.instance_id
-  port             = each.value.port
-}
 
 resource "aws_lb_listener" "main" {
   load_balancer_arn = aws_lb.main.arn
