@@ -3,9 +3,10 @@ resource "aws_apigatewayv2_api" "this" {
   protocol_type = "HTTP"
 
   cors_configuration {
-    allow_headers = ["content-type", "authorization"]
-    allow_methods = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
-    allow_origins = var.cors_allowed_origins
+    allow_headers     = ["content-type", "authorization"]
+    allow_methods     = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+    allow_origins     = var.cors_allowed_origins
+    allow_credentials = true
   }
 
   tags = var.tags

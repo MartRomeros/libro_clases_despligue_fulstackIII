@@ -44,6 +44,13 @@ module "sg_alb" {
       protocol    = "tcp"
       description = "ms-gestion"
       cidr_blocks = var.vpc_cidr
+    },
+    {
+      from_port   = 3003
+      to_port     = 3003
+      protocol    = "tcp"
+      description = "ms-matricula"
+      cidr_blocks = var.vpc_cidr
     }
   ]
 }

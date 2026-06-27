@@ -72,6 +72,7 @@ module "ms_asistencia" {
   desired_count   = local.desired_count
 
   environment_variables = [
+    { name = "JWT_SECRET", value = var.jwt_secret },
     { name = "PORT", value = "3001" },
     { name = "DB_USER", value = var.db_user },
     { name = "DB_PASSWORD", value = var.db_password },
@@ -154,6 +155,34 @@ module "ms_gestion" {
   ]
 
   target_group_arn   = var.alb_target_group_arns["gestion"]
+  security_group_id  = var.security_group_id
+  enable_autoscaling = local.enable_autoscaling
+  min_capacity       = local.min_capacity
+  max_capacity       = local.max_capacity
+  cpu_target_value   = local.cpu_target_value
+}
+
+module "ms_matricula" {
+  source = "./ecs_services"
+
+  name                    = "${var.name_prefix}-ms-matricula"
+  cluster_id              = aws_ecs_cluster.this.id
+  cluster_name            = aws_ecs_cluster.this.name
+  subnets                 = var.vpc_private_subnets
+  task_execution_role_arn = var.task_execution_role_arn
+
+  cpu             = local.cpu
+  memory          = local.memory
+  container_image = "martromeros/ms-matricula:latest"
+  container_port  = 3003
+  desired_count   = local.desired_count
+
+  environment_variables = [
+    { name = "DB_URL", value = "postgresql://${var.db_user}:${var.db_password}@${var.db_host}:5432/${var.db_name}"},
+    { name = "DB_SSL", value = "true"},
+  ]
+
+  target_group_arn   = var.alb_target_group_arns["matricula"]
   security_group_id  = var.security_group_id
   enable_autoscaling = local.enable_autoscaling
   min_capacity       = local.min_capacity

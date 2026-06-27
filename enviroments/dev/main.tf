@@ -142,6 +142,7 @@ module "alb" {
     asistencia     = { port = 3001 }
     comunicaciones = { port = 3002 }
     gestion        = { port = 8080 }
+    matricula      = { port = 3003 }
   }
 
   routes = [
@@ -181,6 +182,11 @@ module "alb" {
       priority      = 70
       service_key   = "gestion"
       path_patterns = ["/api/usuarios/*"]
+    },
+    {
+      priority      = 80
+      service_key   = "matricula"
+      path_patterns = ["/api/matriculas", "/api/matriculas/*"]
     }
   ]
 }
@@ -194,7 +200,7 @@ module "api_gateway" {
   vpc_link_sg_id       = aws_security_group.vpc_link.id
   vpc_link_subnet_ids  = [module.vpc_colegio.private_subnets[0], module.vpc_colegio.private_subnets[1]]
   stage_name           = "$default"
-  cors_allowed_origins = ["*"]
+  cors_allowed_origins = ["https://rda-registro.cl","http://localhost:4200"]
   tags = {
     Project = "${var.project_name}-http-apigw"
     Layer   = "Edge"

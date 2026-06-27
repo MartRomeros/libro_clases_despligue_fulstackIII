@@ -24,6 +24,7 @@ module "ec2" {
 
               sudo apt-get update -y
               sudo apt-get install -y git docker.io
+              sudo apt install postgresql postgresql-contrib -y
 
               sudo systemctl start docker
               sudo systemctl enable docker

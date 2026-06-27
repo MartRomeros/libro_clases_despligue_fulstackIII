@@ -33,6 +33,13 @@ module "sg_backend" {
       protocol                 = "tcp"
       description              = "ms-gestion desde ALB"
       source_security_group_id = var.alb_sg_id
+    },
+    {
+      from_port                = 3003
+      to_port                  = 3003
+      protocol                 = "tcp"
+      description              = "ms-matricula desde ALB"
+      source_security_group_id = var.alb_sg_id
     }
   ]
 
