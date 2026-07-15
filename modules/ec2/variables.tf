@@ -46,3 +46,33 @@ variable "root_volume_type" {
   type        = string
   default     = "gp3"
 }
+
+variable "ngrok_authtoken" {
+  description = "Authtoken de ngrok para levantar el túnel HTTPS"
+  type        = string
+  sensitive   = true
+}
+
+variable "n8n_image" {
+  description = "Imagen Docker de n8n a ejecutar"
+  type        = string
+  default     = "n8nio/n8n:latest"
+}
+
+variable "n8n_port" {
+  description = "Puerto donde escucha n8n (host y contenedor) y al que apunta el túnel de ngrok"
+  type        = number
+  default     = 5678
+}
+
+variable "n8n_basic_auth_user" {
+  description = "Usuario para la autenticación básica de n8n"
+  type        = string
+  sensitive   = true
+}
+
+variable "n8n_basic_auth_password" {
+  description = "Password para la autenticación básica de n8n"
+  type        = string
+  sensitive   = true
+}

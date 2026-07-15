@@ -77,3 +77,28 @@ variable "mail_user" {
 variable "mail_port" {
   type = number
 }
+
+variable "jwt_secret" {
+  description = "Secret para firmar JWT en ms-auth"
+  type        = string
+  sensitive   = true
+  default     = "default-jwt-secret"
+}
+
+variable "ngrok_authtoken" {
+  description = "Authtoken de ngrok para el túnel HTTPS de n8n en la EC2 de administración"
+  type        = string
+  sensitive   = true
+}
+
+variable "n8n_basic_auth_user" {
+  description = "Usuario de autenticación básica para n8n"
+  type        = string
+  sensitive   = true
+}
+
+variable "n8n_basic_auth_password" {
+  description = "Password de autenticación básica para n8n"
+  type        = string
+  sensitive   = true
+}

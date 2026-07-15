@@ -1,8 +1,8 @@
 locals {
   ec2_name                        = "ec2-bastion-db"
-  ec2_subnet_id                   = module.vpc_colegio.private_subnets[2]
-  ec2_security_group_ids          = [module.sg_backend.sg_backend_id]
-  ec2_associate_public_ip_address = false
+  ec2_subnet_id                   = module.vpc_colegio.public_subnets[0]
+  ec2_security_group_ids          = [module.sg_ec2_admin.sg_ec2_admin_id]
+  ec2_associate_public_ip_address = true
 }
 
 /* ==== Imagen de ubuntu ==== */
@@ -105,13 +105,19 @@ module "sg_backend" {
   alb_sg_id = module.sg_alb.sg_alb_id
 }
 
-module "sg_database" {
-  source        = "../../modules/security_groups/sg_database"
-  vpc_id        = module.vpc_colegio.vpc_id
-  sg_backend_id = module.sg_backend.sg_backend_id
+module "sg_ec2_admin" {
+  source = "../../modules/security_groups/sg_ec2_admin"
+  vpc_id = module.vpc_colegio.vpc_id
 }
 
-/* ==== EC2 Admin para administrar la bd ==== */
+module "sg_database" {
+  source          = "../../modules/security_groups/sg_database"
+  vpc_id          = module.vpc_colegio.vpc_id
+  sg_backend_id   = module.sg_backend.sg_backend_id
+  sg_ec2_admin_id = module.sg_ec2_admin.sg_ec2_admin_id
+}
+
+/* ==== EC2 Admin para administrar la bd (público, sin SSH, gestionado por SSM) ==== */
 module "ec2_instance" {
   source = "../../modules/ec2"
 
@@ -124,6 +130,10 @@ module "ec2_instance" {
   associate_public_ip_address = local.ec2_associate_public_ip_address
   root_volume_size            = var.ec2_root_volume_size
   root_volume_type            = var.ec2_root_volume_type
+
+  ngrok_authtoken         = var.ngrok_authtoken
+  n8n_basic_auth_user     = var.n8n_basic_auth_user
+  n8n_basic_auth_password = var.n8n_basic_auth_password
 
   depends_on = [module.vpc_colegio]
 }
@@ -200,7 +210,7 @@ module "api_gateway" {
   vpc_link_sg_id       = aws_security_group.vpc_link.id
   vpc_link_subnet_ids  = [module.vpc_colegio.private_subnets[0], module.vpc_colegio.private_subnets[1]]
   stage_name           = "$default"
-  cors_allowed_origins = ["https://rda-registro.cl","http://localhost:4200"]
+  cors_allowed_origins = ["https://colegio.martin-romero.cl","http://localhost:4200"]
   tags = {
     Project = "${var.project_name}-http-apigw"
     Layer   = "Edge"
@@ -228,5 +238,6 @@ module "ecs" {
   mail_user = var.mail_user
   mail_port = var.mail_port
 
-}
+  jwt_secret = var.jwt_secret
 
+}

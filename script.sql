@@ -176,13 +176,13 @@ INSERT INTO roles (rol_id, nombre) VALUES
 
 -- 3. Insertar Usuarios Administrativos y Docentes base
 INSERT INTO usuarios (usuario_id, rol_id, rut, nombre, apellido_paterno, apellido_materno, email, password) VALUES
-(1, 1, '11.111.111-1', 'Admin', 'Sistema', 'Principal', 'admin@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(2, 2, '12.222.222-2', 'Carla', 'Rodríguez', 'Pérez', 'c.rodriguez@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(3, 2, '13.333.333-3', 'Marcos', 'Soto', 'López', 'm.soto@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(1, 1, '21.340.282-K', 'Martin', 'Romero', 'Serrano', 'martinsantiago.se@gmail.com', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(2, 2, '16.123.456-1', 'Carla', 'Rodríguez', 'Pérez', 'c.rodriguez@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(3, 2, '17.654.321-K', 'Marcos', 'Soto', 'López', 'm.soto@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
 -- Tres nuevos docentes
-(4, 2, '14.444.444-4', 'Patricia', 'Rojas', 'Díaz', 'p.rojas@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(5, 2, '15.555.555-5', 'Andrés', 'Castro', 'Silva', 'a.castro@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(6, 2, '16.666.666-6', 'Elena', 'Morales', 'Ramos', 'e.morales@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y');
+(4, 2, '18.456.789-0', 'Patricia', 'Rojas', 'Díaz', 'p.rojas@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(5, 2, '19.234.567-9', 'Andrés', 'Castro', 'Silva', 'a.castro@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(6, 2, '20.555.666-2', 'Elena', 'Morales', 'Ramos', 'e.morales@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y');
 
 -- Especialidad principal de cada docente (referencia informativa; la asignación real es en curso_asignatura_docente)
 INSERT INTO docentes (docente_id, especialidad) VALUES
@@ -230,61 +230,64 @@ FROM generate_series(1, (SELECT count(*)::int FROM cursos)) AS gs;
 -- IDs de usuario: 100-149 (sin conflicto con admin/docentes 1-6)
 INSERT INTO usuarios (usuario_id, rol_id, rut, nombre, apellido_paterno, apellido_materno, email, password) VALUES
 -- 1° Básico A (10 alumnos, IDs 100-109)
-(100, 3, '20.100.001-5', 'Sofía',     'González',  'Muñoz',     'sofia.gonzalez@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(101, 3, '20.100.002-6', 'Diego',     'Ramírez',   'Torres',    'diego.ramirez@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(102, 3, '20.100.003-7', 'Valentina', 'Flores',    'Herrera',   'valentina.flores@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(103, 3, '20.100.004-8', 'Matías',    'Morales',   'Vega',      'matias.morales@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(104, 3, '20.100.005-9', 'Isabella',  'Castro',    'Pino',      'isabella.castro@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(100, 3, '20.100.001-K', 'Sofía',     'González',  'Muñoz',     'sofia.gonzalez@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(101, 3, '20.100.002-8', 'Diego',     'Ramírez',   'Torres',    'diego.ramirez@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(102, 3, '20.100.003-6', 'Valentina', 'Flores',    'Herrera',   'valentina.flores@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(103, 3, '20.100.004-4', 'Matías',    'Morales',   'Vega',      'matias.morales@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(104, 3, '20.100.005-2', 'Isabella',  'Castro',    'Pino',      'isabella.castro@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
 (105, 3, '20.100.006-0', 'Lucas',     'Jiménez',   'Ríos',      'lucas.jimenez@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(106, 3, '20.100.007-1', 'Antonia',   'Vargas',    'Salinas',   'antonia.vargas@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(107, 3, '20.100.008-2', 'Benjamín',  'Soto',      'Espinoza',  'benjamin.soto@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(108, 3, '20.100.009-3', 'Camila',    'Reyes',     'Fuentes',   'camila.reyes@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(109, 3, '20.100.010-4', 'Sebastián', 'Rojas',     'Mena',      'sebastian.rojas@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
--- 1° Básico B (10 alumnos, IDs 110-119)
-(110, 3, '20.110.001-6', 'Fernanda',  'Pérez',     'Lagos',     'fernanda.perez@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(111, 3, '20.110.002-7', 'Nicolás',   'Álvarez',   'Contreras', 'nicolas.alvarez@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(112, 3, '20.110.003-8', 'Emilia',    'Torres',    'Navarro',   'emilia.torres@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(113, 3, '20.110.004-9', 'Tomás',     'Díaz',      'Guerrero',  'tomas.diaz@colegio.cl',       '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(114, 3, '20.110.005-0', 'Catalina',  'Ortega',    'Miranda',   'catalina.ortega@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(115, 3, '20.110.006-1', 'Agustín',   'Gutiérrez', 'Campos',    'agustin.gutierrez@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(116, 3, '20.110.007-2', 'Isidora',   'Núñez',     'Vera',      'isidora.nunez@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(117, 3, '20.110.008-3', 'Felipe',    'Medina',    'Araya',     'felipe.medina@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(118, 3, '20.110.009-4', 'Renata',    'Molina',    'Cáceres',   'renata.molina@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(119, 3, '20.110.010-5', 'Joaquín',   'Silva',     'Bravo',     'joaquin.silva@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
--- 2° Básico A (10 alumnos, IDs 120-129)
-(120, 3, '20.120.001-7', 'Amaranta',  'Fuentes',   'Ibáñez',    'amaranta.fuentes@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(121, 3, '20.120.002-8', 'Rodrigo',   'Herrera',   'Pinto',     'rodrigo.herrera@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(122, 3, '20.120.003-9', 'Violeta',   'Lara',      'Sepúlveda', 'violeta.lara@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(123, 3, '20.120.004-0', 'Cristóbal', 'Vega',      'Sandoval',  'cristobal.vega@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(124, 3, '20.120.005-1', 'Javiera',   'Arce',      'Cid',       'javiera.arce@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(125, 3, '20.120.006-2', 'Ignacio',   'Contreras', 'Leiva',     'ignacio.contreras@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(126, 3, '20.120.007-3', 'Francisca', 'Espinoza',  'Ojeda',     'francisca.espinoza@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(127, 3, '20.120.008-4', 'Maximiliano','Castillo',  'Opazo',     'maximiliano.castillo@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(128, 3, '20.120.009-5', 'Trinidad',  'Sánchez',   'Muñoz',     'trinidad.sanchez@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(129, 3, '20.120.010-6', 'Vicente',   'Valenzuela','Carreño',   'vicente.valenzuela@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
--- 1° Medio A (10 alumnos, IDs 130-139)
-(130, 3, '20.130.001-8', 'Gabriela',  'Paredes',   'Riquelme',  'gabriela.paredes@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(131, 3, '20.130.002-9', 'Alonso',    'Tapia',     'Aguilar',   'alonso.tapia@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(132, 3, '20.130.003-0', 'Martina',   'Reyes',     'Donoso',    'martina.reyes@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(133, 3, '20.130.004-1', 'Gonzalo',   'Muñoz',     'Acuña',     'gonzalo.munoz@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(134, 3, '20.130.005-2', 'Pilar',     'Bravo',     'Figueroa',  'pilar.bravo@colegio.cl',      '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(135, 3, '20.130.006-3', 'Óscar',     'Cortés',    'Lobos',     'oscar.cortes@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(136, 3, '20.130.007-4', 'Renée',     'Poblete',   'Farías',    'renee.poblete@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(137, 3, '20.130.008-5', 'Andrés',    'Olivares',  'Henríquez', 'andres.olivares@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(138, 3, '20.130.009-6', 'Paula',     'Vallejos',  'Carrasco',  'paula.vallejos@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(139, 3, '20.130.010-7', 'Esteban',   'Meza',      'Bustamante','esteban.meza@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
--- 2° Medio A (10 alumnos, IDs 140-149)
-(140, 3, '20.140.001-9', 'Rocío',     'Vidal',     'Espejo',    'rocio.vidal@colegio.cl',      '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(141, 3, '20.140.002-0', 'Patricio',  'Cerda',     'Rojas',     'patricio.cerda@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(142, 3, '20.140.003-1', 'Andrea',    'Lagos',     'Sepúlveda', 'andrea.lagos@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(143, 3, '20.140.004-2', 'Roberto',   'Arriagada', 'Díaz',      'roberto.arriagada@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(144, 3, '20.140.005-3', 'Constanza', 'Ibarra',    'Pizarro',   'constanza.ibarra@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(145, 3, '20.140.006-4', 'Simón',     'Cárdenas',  'Cuevas',    'simon.cardenas@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(146, 3, '20.140.007-5', 'Loreto',    'Garrido',   'Villalobos','loreto.garrido@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(147, 3, '20.140.008-6', 'Cristián',  'Henríquez', 'Troncoso',  'cristian.henriquez@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(148, 3, '20.140.009-7', 'Daniela',   'Riffo',     'Zuñiga',    'daniela.riffo@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(149, 3, '20.140.010-8', 'Manuel',    'Espinoza',  'Vergara',   'manuel.espinoza@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y');
+(106, 3, '20.100.007-9', 'Antonia',   'Vargas',    'Salinas',   'antonia.vargas@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(107, 3, '20.100.008-7', 'Benjamín',  'Soto',      'Espinoza',  'benjamin.soto@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(108, 3, '20.100.009-5', 'Camila',    'Reyes',     'Fuentes',   'camila.reyes@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(109, 3, '20.100.010-9', 'Sebastián', 'Rojas',     'Mena',      'sebastian.rojas@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
 
+-- 1° Básico B (10 alumnos, IDs 110-119)
+(110, 3, '20.110.001-4', 'Fernanda',  'Pérez',     'Lagos',     'fernanda.perez@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(111, 3, '20.110.002-2', 'Nicolás',   'Álvarez',   'Contreras', 'nicolas.alvarez@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(112, 3, '20.110.003-0', 'Emilia',    'Torres',    'Navarro',   'emilia.torres@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(113, 3, '20.110.004-9', 'Tomás',     'Díaz',      'Guerrero',  'tomas.diaz@colegio.cl',       '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(114, 3, '20.110.005-7', 'Catalina',  'Ortega',    'Miranda',   'catalina.ortega@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(115, 3, '20.110.006-5', 'Agustín',   'Gutiérrez', 'Campos',    'agustin.gutierrez@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(116, 3, '20.110.007-3', 'Isidora',   'Núñez',     'Vera',      'isidora.nunez@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(117, 3, '20.110.008-1', 'Felipe',    'Medina',    'Araya',     'felipe.medina@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(118, 3, '20.110.009-K', 'Renata',    'Molina',    'Cáceres',   'renata.molina@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(119, 3, '20.110.010-3', 'Joaquín',   'Silva',     'Bravo',     'joaquin.silva@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+
+-- 2° Básico A (10 alumnos, IDs 120-129)
+(120, 3, '20.120.001-9', 'Amaranta',  'Fuentes',   'Ibáñez',    'amaranta.fuentes@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(121, 3, '20.120.002-7', 'Rodrigo',   'Herrera',   'Pinto',     'rodrigo.herrera@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(122, 3, '20.120.003-5', 'Violeta',   'Lara',      'Sepúlveda', 'violeta.lara@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(123, 3, '20.120.004-3', 'Cristóbal', 'Vega',      'Sandoval',  'cristobal.vega@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(124, 3, '20.120.005-1', 'Javiera',   'Arce',      'Cid',       'javiera.arce@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(125, 3, '20.120.006-K', 'Ignacio',   'Contreras', 'Leiva',     'ignacio.contreras@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(126, 3, '20.120.007-8', 'Francisca', 'Espinoza',  'Ojeda',     'francisca.espinoza@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(127, 3, '20.120.008-6', 'Maximiliano','Castillo', 'Opazo',     'maximiliano.castillo@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(128, 3, '20.120.009-4', 'Trinidad',  'Sánchez',   'Muñoz',     'trinidad.sanchez@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(129, 3, '20.120.010-8', 'Vicente',   'Valenzuela','Carreño',   'vicente.valenzuela@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+
+-- 1° Medio A (10 alumnos, IDs 130-139)
+(130, 3, '20.130.001-3', 'Gabriela',  'Paredes',   'Riquelme',  'gabriela.paredes@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(131, 3, '20.130.002-1', 'Alonso',    'Tapia',     'Aguilar',   'alonso.tapia@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(132, 3, '20.130.003-K', 'Martina',   'Reyes',     'Donoso',    'martina.reyes@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(133, 3, '20.130.004-8', 'Gonzalo',   'Muñoz',     'Acuña',     'gonzalo.munoz@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(134, 3, '20.130.005-6', 'Pilar',     'Bravo',     'Figueroa',  'pilar.bravo@colegio.cl',      '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(135, 3, '20.130.006-4', 'Óscar',     'Cortés',    'Lobos',     'oscar.cortes@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(136, 3, '20.130.007-2', 'Renée',     'Poblete',   'Farías',    'renee.poblete@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(137, 3, '20.130.008-0', 'Andrés',    'Olivares',  'Henríquez', 'andres.olivares@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(138, 3, '20.130.009-9', 'Paula',     'Vallejos',  'Carrasco',  'paula.vallejos@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(139, 3, '20.130.010-2', 'Esteban',   'Meza',      'Bustamante','esteban.meza@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+
+-- 2° Medio A (10 alumnos, IDs 140-149)
+(140, 3, '20.140.001-8', 'Rocío',     'Vidal',     'Espejo',    'rocio.vidal@colegio.cl',      '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(141, 3, '20.140.002-6', 'Patricio',  'Cerda',     'Rojas',     'patricio.cerda@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(142, 3, '20.140.003-4', 'Andrea',    'Lagos',     'Sepúlveda', 'andrea.lagos@colegio.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(143, 3, '20.140.004-2', 'Roberto',   'Arriagada', 'Díaz',      'roberto.arriagada@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(144, 3, '20.140.005-0', 'Constanza', 'Ibarra',    'Pizarro',   'constanza.ibarra@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(145, 3, '20.140.006-9', 'Simón',     'Cárdenas',  'Cuevas',    'simon.cardenas@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(146, 3, '20.140.007-7', 'Loreto',    'Garrido',   'Villalobos','loreto.garrido@colegio.cl',   '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(147, 3, '20.140.008-5', 'Cristián',  'Henríquez', 'Troncoso',  'cristian.henriquez@colegio.cl','$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(148, 3, '20.140.009-3', 'Daniela',   'Riffo',     'Zuñiga',    'daniela.riffo@colegio.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(149, 3, '20.140.010-7', 'Manuel',    'Espinoza',  'Vergara',   'manuel.espinoza@colegio.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y');
 -- Vincular estudiantes a sus cursos
 INSERT INTO estudiantes (estudiante_id, curso_id) VALUES
 -- 1° Básico A (curso_id = 1)
@@ -315,12 +318,11 @@ INSERT INTO asignaturas (nombre, siglas) VALUES
 
 -- 8. Apoderados (rol_id=4, IDs 200-204)
 INSERT INTO usuarios (usuario_id, rol_id, rut, nombre, apellido_paterno, apellido_materno, email, password) VALUES
-(200, 4, '30.200.001-1', 'Carmen',  'González', 'Soto',    'carmen.gonzalez@mail.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(201, 4, '30.200.002-2', 'Jorge',   'Ramírez',  'Lagos',   'jorge.ramirez@mail.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(202, 4, '30.200.003-3', 'Ana',     'Flores',   'Morales', 'ana.flores@mail.cl',       '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(200, 4, '30.200.001-K', 'Carmen',  'González', 'Soto',    'carmen.gonzalez@mail.cl',  '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(201, 4, '30.200.002-8', 'Jorge',   'Ramírez',  'Lagos',   'jorge.ramirez@mail.cl',    '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(202, 4, '30.200.003-6', 'Ana',      'Flores',   'Morales', 'ana.flores@mail.cl',       '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
 (203, 4, '30.200.004-4', 'Pedro',   'Castro',   'Reyes',   'pedro.castro@mail.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
-(204, 4, '30.200.005-5', 'Lucía',   'Medina',   'Vega',    'lucia.medina@mail.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y');
-
+(204, 4, '30.200.005-2', 'Lucía',   'Medina',   'Vega',    'lucia.medina@mail.cl',     '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y');
 INSERT INTO apoderados (apoderado_id) VALUES (200), (201), (202), (203), (204);
 
 -- Cada apoderado cubre estudiantes del mismo curso
@@ -458,13 +460,6 @@ INSERT INTO anotaciones (estudiante_id, docente_id, tipo, descripcion, fecha_reg
 (143, 5, 'Negativa',  'No trajo los materiales requeridos para el laboratorio de Ciencias.',                    '2024-04-10 14:30:00'),
 (146, 6, 'Positiva',  'Participó con entusiasmo en la actividad de inglés conversacional.',                     '2024-04-11 15:00:00');
 
--- 14. Mensajería
-INSERT INTO mensajeria (quien_envia, quien_recibe, asunto, cuerpo_mensaje) VALUES
-('admin@colegio.cl',       'c.rodriguez@colegio.cl', 'Reunión de coordinación docente',   'Estimada Carla, la reunión de coordinación es el viernes 19 de abril a las 15:00 hrs en la sala de profesores.'),
-('admin@colegio.cl',       'm.soto@colegio.cl',       'Reunión de coordinación docente',   'Estimado Marcos, la reunión de coordinación es el viernes 19 de abril a las 15:00 hrs en la sala de profesores.'),
-('admin@colegio.cl',       'p.rojas@colegio.cl',      'Reunión de coordinación docente',   'Estimada Patricia, la reunión de coordinación es el viernes 19 de abril a las 15:00 hrs en la sala de profesores.'),
-('c.rodriguez@colegio.cl', 'admin@colegio.cl',        'Solicitud de materiales',           'Buen día, necesito solicitar hojas de evaluación y calculadoras para las pruebas de junio. Quedo atenta a su respuesta.'),
-('carmen.gonzalez@mail.cl','admin@colegio.cl',         'Consulta sobre asistencia',         'Estimados, quisiera consultar sobre las inasistencias registradas de mi hija Sofía González en el mes de abril.');
 
 -- 15. Sincronizar secuencias con los IDs insertados manualmente
 SELECT setval(pg_get_serial_sequence('roles',    'rol_id'),     (SELECT MAX(rol_id)     FROM roles));

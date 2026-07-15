@@ -33,7 +33,4 @@ vockey.pub
 *.pem
 
 .env
-.claude/
-CLAUDE.md
 .obsidian/
-.kiro/

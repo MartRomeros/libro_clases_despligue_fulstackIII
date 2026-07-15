@@ -91,7 +91,15 @@ services:
       DB_PORT: ${DB_PORT}
       DB_DATABASE: ${DB_DATABASE}
       RABBITMQ_URL: amqp://admin:admin123@rabbit-mq:5672
-      
+      JWT_SECRET: ${JWT_SECRET}
+
+  agente:
+      image: n8nio/n8n:nightly-038d2ca
+      container_name: agente
+      restart: always
+      ports:
+        - "5678:5678"
+
 
   ms-gestion:
     image: martromeros/ms-gestion:latest
@@ -112,6 +120,7 @@ services:
       RABBITMQ_PORT: 5672
       RABBITMQ_USER: admin
       RABBITMQ_PASS: admin123
+      JWT_SECRET: ${JWT_SECRET}
   ms-matricula:
     image: martromeros/ms-matricula:latest
     container_name: ms_matricula
@@ -125,7 +134,7 @@ services:
       DB_URL: postgresql://postgres:secure-key@db:5432/colegio
       #WEBPAY_COMMERCE_CODE: ${WEBPAY_COMMERCE_CODE}
       #WEBPAY_API_KEY: ${WEBPAY_API_KEY}
-      
+
 
 
   rabbit-mq:

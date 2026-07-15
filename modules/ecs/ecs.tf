@@ -107,11 +107,12 @@ module "ms_comunicaciones" {
 
   environment_variables = [
     { name = "PORT", value = "3002" },
+    { name = "JWT_SECRET", value = var.jwt_secret },
     { name = "DB_USER", value = var.db_user },
     { name = "DB_PASSWORD", value = var.db_password },
     { name = "DB_HOST", value = var.db_host },
     { name = "DB_PORT", value = "5432" },
-    { name = "DB_DATABASE", value = var.db_name },    
+    { name = "DB_DATABASE", value = var.db_name },
     { name = "UPLOAD_PATH", value = "/uploads" },
     { name = "DB_SSL", value = "true" },
     { name = "ENVIRONMENT", value = "prod" },
@@ -148,6 +149,7 @@ module "ms_gestion" {
 
   environment_variables = [
     { name = "DB_URL", value = "jdbc:postgresql://${var.db_host}:5432/${var.db_name}" },
+    { name = "JWT_SECRET", value = var.jwt_secret },
     { name = "DB_USERNAME", value = var.db_user },
     { name = "DB_PASSWORD", value = var.db_password },
     { name = "ENVIRONMENT", value = "prod" },
@@ -178,6 +180,7 @@ module "ms_matricula" {
   desired_count   = local.desired_count
 
   environment_variables = [
+
     { name = "DB_URL", value = "postgresql://${var.db_user}:${var.db_password}@${var.db_host}:5432/${var.db_name}"},
     { name = "DB_SSL", value = "true"},
   ]
@@ -189,4 +192,3 @@ module "ms_matricula" {
   max_capacity       = local.max_capacity
   cpu_target_value   = local.cpu_target_value
 }
-
