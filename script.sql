@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS mensajeria (
     asunto VARCHAR(255) NOT NULL,
     cuerpo_mensaje TEXT,
     -- Cambiamos id_archivo_adjunto de UUID a TEXT para guardar la ruta solicitada
-    id_archivo_adjunto TEXT, 
+    id_archivo_adjunto TEXT,
     leido BOOLEAN DEFAULT FALSE
 );
 
@@ -176,7 +176,7 @@ INSERT INTO roles (rol_id, nombre) VALUES
 
 -- 3. Insertar Usuarios Administrativos y Docentes base
 INSERT INTO usuarios (usuario_id, rol_id, rut, nombre, apellido_paterno, apellido_materno, email, password) VALUES
-(1, 1, '21.340.282-K', 'Martin', 'Romero', 'Serrano', 'martinsantiago.se@gmail.com', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
+(1, 1, '21.340.282-K', 'Martin', 'Romero', 'Serrano', 'martin@gmail.com', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
 (2, 2, '16.123.456-1', 'Carla', 'Rodríguez', 'Pérez', 'c.rodriguez@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
 (3, 2, '17.654.321-K', 'Marcos', 'Soto', 'López', 'm.soto@colegio.cl', '$2a$12$Iy8XTvbNC7Y.RWipf8O8f.vNU3VrVNC9m4Iq.02bPi.6pRbHYL66y'),
 -- Tres nuevos docentes
@@ -473,4 +473,3 @@ SELECT setval(pg_get_serial_sequence('asistencia', 'asistencia_id'), (SELECT MAX
 SELECT setval(pg_get_serial_sequence('anotaciones', 'anotacion_id'), (SELECT MAX(anotacion_id) FROM anotaciones));
 SELECT setval(pg_get_serial_sequence('mensajeria', 'id'), (SELECT MAX(id) FROM mensajeria));
 SELECT setval(pg_get_serial_sequence('salas', 'sala_id'), (SELECT MAX(sala_id) FROM salas));
-
